@@ -1,47 +1,21 @@
-from machine import Pin
-import time
-import network
-import urequests
+for i in range (50):
+    print("starting")
 
-ssid = 'pythom'
-password = 'bebesitobebelin'
-
-led = Pin("LED", Pin.OUT)
-
-wlan = network.WLAN(network.STA_IF)
-wlan.active(True)
-# nets = wlan.scan()
-wlan.connect(ssid, password)
-
-#for wlan in nets:
-#    print(wlan)
-
-print(wlan.isconnected())
-
-print("=======>")
-
-if wlan.isconnected() is False:
-    raise RuntimeError('network connection failed')
-else:
-    print('connected')
-    status = wlan.ifconfig()
-    print( 'ip = ' + status[0] )
+# import pyb
+# import math
 
 
-# DOING
-# test how to consume an api
-# Get current time
-r = urequests.get('http://worldtimeapi.org/api/ip')
-result = str(r.content)
-startTime = result[int(result.find("datetime")) + 11:30 + result.find("datetime")]
+# hid = pyb.USB_HID()
 
+# def osc(n, d):
+    # for i in range(n):
+        # hid.send((0, int(20 * math.sin(i / 10)), 0, 0))
+        # pyb.delay(d)
 
-print('Start Time', startTime)
+# print("okokok")
 
+# while 1:
+    # print("moving")
+    # osc(100, 50)
+    
 
-## rest of the code
-
-while True:
-    led.value(not led.value())
-    print("hello from time", time.time())
-    time.sleep(3)
