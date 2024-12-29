@@ -78,11 +78,13 @@ def print_enie():
 ## main cicle
 while True:
     keys = keypad.pressed_keys
-    if keys:
-        print("Pressed: ", keys)
+    # if keys:
+        # print("Pressed: ", keys)
     if "#" in keys:
         print_enie()
-    elif '1' in keys:
-        keyboard.send(Keycode.F2)
+    elif 1 in keys:
+        keyboard.send(Keycode.F11)
+        keyboard.release_all()
+        time.sleep(0.1)
 
     time.sleep(0.1)
