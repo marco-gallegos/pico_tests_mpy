@@ -15,6 +15,7 @@ from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS as KeyboardLayout
 # from keyboard_layout_win_es import KeyboardLayout
 from adafruit_hid.keycode import Keycode
 # from keycode_win_es import Keycode
+from meetmode import run_meet_mode, apps
 
 
 ## matrix values 
@@ -74,17 +75,28 @@ def print_enie():
     send_typing(';') # same key as ñ
     switch_layout('mac')
 
+fifteen_minutes = 15 * 60  # 15 minutos en segundos
 
 ## main cicle
 while True:
     keys = keypad.pressed_keys
-    # if keys:
-        # print("Pressed: ", keys)
-    if "#" in keys:
-        print_enie()
-    elif 1 in keys:
-        keyboard.send(Keycode.F11)
-        keyboard.release_all()
-        time.sleep(0.1)
+    print(keys)
+    if len(keys) == 2:
+        if "D" in keys and 1 in keys:
+            run_meet_mode(apps, fifteen_minutes * 2)
+        elif "D" in keys and 2 in keys:
+            run_meet_mode(apps, fifteen_minutes * 3)
+        elif "D" in keys and 3 in keys:
+            run_meet_mode(apps, fifteen_minutes * 4)
+        elif "D" in keys and 4 in keys:
+            run_meet_mode(apps, fifteen_minutes * 6)
+        
+    else:
+        if "#" in keys:
+            print_enie()
+        elif 1 in keys:
+            keyboard.send(Keycode.F11)
+            keyboard.release_all()
+            time.sleep(0.1)
 
     time.sleep(0.1)
